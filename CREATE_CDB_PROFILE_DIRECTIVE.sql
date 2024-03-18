@@ -62,7 +62,7 @@ BEGIN
   DBMS_RESOURCE_MANAGER.CREATE_CDB_PROFILE_DIRECTIVE(
     plan                  => 'newcdb_plan', 
     profile               => 'gold', 
-    shares                => 3, 
+    shares                => 4, 
     utilization_limit     => 60,
     parallel_server_limit => 60);
 END;
