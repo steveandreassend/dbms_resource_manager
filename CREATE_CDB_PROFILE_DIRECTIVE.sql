@@ -243,11 +243,11 @@ BEGIN
 END;
 /
 
-/* for each PDB, assign a profile and restart it */
+/* NB: When creating new PDBs, specify the parameters that are listed in the lockdown profiles */
+
+/* for each PDB, assign a profile and restart it on all RAC nodes: */
 --ALTER SESSION SET CONTAINER=mypdb1;
 --ALTER SYSTEM SET DB_PERFORMANCE_PROFILE=gold SCOPE=spfile;
 --ALTER SYSTEM SET PDB_LOCKDOWN=gold SCOPE=spfile;
---ALTER PLUGGABLE DATABASE CLOSE IMMEDIATE;
---ALTER PLUGGABLE DATABASE OPEN;
-
-
+--ALTER PLUGGABLE DATABASE CLOSE IMMEDIATE INSTANCES=ALL;
+--ALTER PLUGGABLE DATABASE OPEN INSTANCES=ALL;
