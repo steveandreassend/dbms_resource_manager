@@ -56,8 +56,8 @@ BEGIN
     plan                  => 'newcdb_plan', 
     profile               => 'gold', 
     shares                => 3, 
-    utilization_limit     => 100,
-    parallel_server_limit => 100);
+    utilization_limit     => 60,
+    parallel_server_limit => 60);
 END;
 /
 
