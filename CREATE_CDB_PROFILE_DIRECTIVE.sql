@@ -33,6 +33,13 @@ utilization_limit
 The CPU utilization limit for sessions connected to a PDB is set by the utilization_limit parameter in subprograms of the DBMS_RESOURCE_MANAGER package.
 The utilization_limit parameter specifies the percentage of the system resources that a PDB can use. The value ranges from 0 to 100.
 
+parallel_server_limit
+================================
+Limit the number of parallel execution servers (PQ) in a PDB by means of parallel statement queuing. The limit is a “queuing point” because the database queues parallel
+queries when the limit is reached. This is a percentage.
+
+PQ will be activiated automatically if this is configured within the PDB:
+ALTER SESSION SET PARALLEL_DEGREE_POLICY = AUTO;
 
 */
 
@@ -41,7 +48,7 @@ exec DBMS_RESOURCE_MANAGER.CREATE_PENDING_AREA();
 BEGIN
   DBMS_RESOURCE_MANAGER.CREATE_CDB_PLAN(
     plan    => 'newcdb_plan',
-    comment => 'CDB resource plan for newcdb');
+    comment => 'CDB resource plan for soft partitioning the hardware resources across PDB tiers');
 END;
 /
 
@@ -66,8 +73,8 @@ BEGIN
     plan                  => 'newcdb_plan', 
     profile               => 'silver', 
     shares                => 2, 
-    utilization_limit     => 40,
-    parallel_server_limit => 40);
+    utilization_limit     => 30,
+    parallel_server_limit => 30);
 END;
 /
 
